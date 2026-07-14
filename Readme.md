@@ -33,9 +33,9 @@ The following interfaces are available :
 - [Dependencies](#dependencies)
 - [Memory requirements](#memory-requirements)
 - [Features](#features)
+- [Architecture](#architecture)
 - [Benchmarks](#fast-inference-benchmarks)
 - [OpenVINO Support](#openvino)
-- [Architecture](#architecture)
 - [Installation](#installation)
 - [Image Editing support](#image-edit)
 - [Real-time text to image (EXPERIMENTAL)](#real-time-text-to-image)
@@ -157,6 +157,18 @@ If we enable Tiny decoder(TAESD) we can save some memory(2GB approx) for example
 - Add image editing support
 - Add bonsai image (1 bit) GGUF support, Flux 2 Klein GGUF model support
 
+## Architecture
+
+FastSDCPU follows a loosely coupled architecture focusing on maintainability and usability.
+
+### Key Design Principles
+**Separation of Concerns**: The core diffusion pipelines (Pytorch, OpenVINO, GGUF) are decoupled from the user interfaces.
+
+**Interface Flexibility**: A unified underlying engine powers multiple frontend experiences seamlessly, including the Desktop GUI (Qt), the Advanced WebUI, and the Command Line Interface (CLI).
+
+**Extensibility**: The modular setup allows easy integration of new features, such as the MCP server protocol and custom third-party plugins like GIMP.
+
+![FastSDCPU Architecture](https://raw.githubusercontent.com/rupeshs/fastsdcpu/refs/heads/main/docs/images/fastsdcpu-architecture.png)
 
 <a id="fast-inference-benchmarks"></a>
 
@@ -427,19 +439,6 @@ We can use ControlNet in LCM-LoRA mode.
 Download ControlNet models from [ControlNet-v1-1](https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/tree/main).Download and place controlnet models in "controlnet_models" folder.
 
 Use the medium size models (723 MB)(For example : <https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/blob/main/control_v11p_sd15_canny_fp16.safetensors>)
-
-## Architecture
-
-FastSDCPU follows a loosely coupled architecture focusing on maintainability and usability.
-
-### Key Design Principles
-**Separation of Concerns**: The core diffusion pipelines (Pytorch, OpenVINO, GGUF) are decoupled from the user interfaces.
-
-**Interface Flexibility**: A unified underlying engine powers multiple frontend experiences seamlessly, including the Desktop GUI (Qt), the Advanced WebUI, and the Command Line Interface (CLI).
-
-**Extensibility**: The modular setup allows easy integration of new features, such as the MCP server protocol and custom third-party plugins like GIMP.
-
-![FastSDCPU Architecture](https://raw.githubusercontent.com/rupeshs/fastsdcpu/refs/heads/main/docs/images/fastsdcpu-architecture.png)
 
 ## Installation
 
