@@ -90,7 +90,10 @@ async def models():
 )
 async def generate(diffusion_config: LCMDiffusionSetting) -> StableDiffusionResponse:
     app_settings.settings.lcm_diffusion_setting = diffusion_config
-    if diffusion_config.diffusion_task == DiffusionTask.image_to_image:
+    if (
+        diffusion_config.diffusion_task == DiffusionTask.image_to_image
+        or diffusion_config.diffusion_task == DiffusionTask.edit_image
+    ):
         app_settings.settings.lcm_diffusion_setting.init_image = base64_image_to_pil(
             diffusion_config.init_image
         )
